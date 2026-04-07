@@ -1,7 +1,8 @@
 import requests, json, pytest
 import random
+from utils.config_reader import get_pet_url_api
 
-base_uri = "https://petstore.swagger.io/v2/pet/"
+base_uri = get_pet_url_api()
 pet_id = str(random.randint(250002, 260002))
 
 

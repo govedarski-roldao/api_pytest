@@ -1,7 +1,8 @@
 from utils.my_utils import get_api_data
 import random
+from utils.config_reader import get_pet_url_api
 
-base_uri = "https://petstore.swagger.io/v2/pet/"
+base_uri = get_pet_url_api()
 pet_id = str(random.randint(250002, 260002))
 
 
@@ -9,3 +10,4 @@ def test_get_pet_by_id():
     pet_data, res_status, time_taken = get_api_data(base_uri + "100")
     print(time_taken)
     assert pet_data["id"] == 100
+    assert res_status == 200
