@@ -1,4 +1,4 @@
-from utils.my_utils import get_api_data
+from utils.my_utils import get_api_data, put_data
 import random
 from utils.config_reader import get_pet_url_api
 
@@ -11,3 +11,18 @@ def test_get_pet_by_id():
     print(time_taken)
     assert pet_data["id"] == 100
     assert res_status == 200
+
+
+# test updating a pet
+def test_updating_pet():
+    payload = {
+        "id": 100,
+        "name": "Pterolord",
+        "status": "available"
+    }
+    print(base_uri)
+    data, res_status, time_taken = put_data(base_uri, payload)
+    print(data)
+    assert data['id'] == 100
+
+#

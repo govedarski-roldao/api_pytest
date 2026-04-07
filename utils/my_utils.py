@@ -11,3 +11,13 @@ def get_api_data(url):
     print(data)
     assert len(data) > 0, "empty response!!!!"
     return data, response.status_code, time_taken
+
+
+def put_data(url, body):
+    headers = {"content-type": "application/json"}
+    print("Request URL: ", url)
+    print("Request body: ", json.dumps(body))
+    response = requests.put(url, json=body, headers=headers, verify=False)
+    data = response.json()
+    time_taken = response.elapsed.total_seconds()
+    return data, response.status_code, time_taken
