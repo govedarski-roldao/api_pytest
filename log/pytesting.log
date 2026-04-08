@@ -1,0 +1,4 @@
+2026-04-08 14:43:56 [ WARNING] [test_loggings] This is a warning message (test_loggings.py:6)
+2026-04-08 14:43:56 [   ERROR] [test_loggings] This is a error message (test_loggings.py:7)
+2026-04-08 14:43:56 [CRITICAL] [test_loggings] This is a critical message (test_loggings.py:8)
+2026-04-08 14:43:56 [    INFO] [test_loggings] This is a info message (test_loggings.py:9)
