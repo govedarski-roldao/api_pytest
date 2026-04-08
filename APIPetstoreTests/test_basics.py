@@ -1,7 +1,7 @@
 import requests, json, pytest
-import random
+import random, logging
 from utils.config_reader import get_pet_url_api
-from utils.my_utils import get_api_data, put_data
+from utils.my_utils import get_api_data, put_data, deleteData
 
 base_uri = get_pet_url_api()
 pet_id = str(random.randint(250002, 260002))
@@ -44,6 +44,7 @@ def test_add_pet():
 def test_get_pet_by_id_present(pet_response):
     assert pet_response['id'] == int(pet_id)
 
+
 def test_updating_pet():
     payload = {
         "id": int(pet_id),
@@ -60,11 +61,12 @@ def test_updating_pet():
     assert data['status'] == 'zombiemode'
 
 
-
 def test_delete_pet_by_id():
     url = base_uri + pet_id
-    response = requests.delete(url, verify=False)
-    assert response.status_code == 200
+    headers = {"api_key": "key1"}
+    data, resp_status, time_taken = deleteData(url, headers)
+    assert resp_status == 200
+    assert data['message'] == pet_id
 
 
 def test_get_pet_by_id_id_deleted(pet_response):
