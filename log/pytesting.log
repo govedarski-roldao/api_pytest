@@ -1,4 +1,4 @@
-2026-04-08 14:43:56 [ WARNING] [test_loggings] This is a warning message (test_loggings.py:6)
-2026-04-08 14:43:56 [   ERROR] [test_loggings] This is a error message (test_loggings.py:7)
-2026-04-08 14:43:56 [CRITICAL] [test_loggings] This is a critical message (test_loggings.py:8)
-2026-04-08 14:43:56 [    INFO] [test_loggings] This is a info message (test_loggings.py:9)
+2026-04-14 01:37:50 [   DEBUG] [urllib3.connectionpool] Starting new HTTP connection (1): 127.0.0.1:5000 (connectionpool.py:241)
+2026-04-14 01:37:50 [   DEBUG] [urllib3.connectionpool] http://127.0.0.1:5000 "GET /api/allusercount HTTP/1.1" 200 82 (connectionpool.py:544)
+2026-04-14 01:37:50 [   DEBUG] [urllib3.connectionpool] Starting new HTTP connection (1): 127.0.0.1:5000 (connectionpool.py:241)
+2026-04-14 01:37:50 [   DEBUG] [urllib3.connectionpool] http://127.0.0.1:5000 "GET /api/allusercount HTTP/1.1" 406 363 (connectionpool.py:544)
