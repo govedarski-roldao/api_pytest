@@ -8,8 +8,8 @@ url_path = "register"
 
 def test_data_driven():
     url = base_uri + url_path
-    payload_list = get_csv_from_file(data_file)
+    payload_list = data_file
     print(url, payload_list)
     for payload in payload_list:
         resp = post_api_data(url, payload)
-        assert resp.status_code == 200
+        assert resp.status_code == 201
