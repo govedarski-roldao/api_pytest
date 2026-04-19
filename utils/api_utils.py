@@ -18,3 +18,26 @@ def post_api_data(url, body, op_header=None):
     print("Request Body: ", json.dumps(body))
     request = requests.post(url, json=body, verify=False, headers=header)
     return request
+
+
+def delete_api_data(url, user_id, token, op_header=None):
+    header = {
+        'Content-Type': 'application/json',
+        "x-access-token": token
+    }
+
+    if isinstance(op_header, dict):
+        header.update(op_header)
+
+    print("\nRequest URL: ", url)
+    print("Request Body: ", json.dumps({"id": user_id}))
+    print("Request Header: ", header)
+
+    response = requests.delete(
+        url,
+        json={"id": user_id},
+        verify=False,
+        headers=header
+    )
+
+    return response
