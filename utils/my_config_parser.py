@@ -24,9 +24,9 @@ def get_store_url_api():
     return config["store"]["url"]
 
 
-def get_flask_app():
+def get_flask_app_base_url():
     base_url = "http://" + config_flask["flaskapp"]["url"] + ":" + config_flask["flaskapp"]["port"] + "/api/"
     return base_url
 
 print(get_pet_url_api())
-print(get_flask_app())
+print(get_flask_app_base_url())

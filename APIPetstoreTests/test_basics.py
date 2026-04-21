@@ -1,6 +1,6 @@
 import requests, json, pytest
 import random, logging
-from utils.config_reader import get_pet_url_api
+from utils.my_config_parser import get_pet_url_api
 from utils.my_utils import get_api_data, put_data, deleteData
 
 base_uri = get_pet_url_api()

@@ -1,9 +1,9 @@
 import requests
 from utils.api_utils import get_api_data
-from utils.config_reader import get_flask_app
+from utils.my_config_parser import get_flask_app_base_url
 import pytest
 
-base_uri = get_flask_app()
+base_uri = get_flask_app_base_url()
 url_path = "allusercount"
 url = base_uri + url_path
 test_data = [

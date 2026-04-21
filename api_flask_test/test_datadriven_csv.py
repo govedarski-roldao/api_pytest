@@ -1,9 +1,9 @@
 import pytest
 from utils.file_utils import get_csv_from_file, get_data_as_tuple
 from utils.api_utils import get_api_data, post_api_data, delete_api_data
-from utils.config_reader import get_flask_app
+from utils.my_config_parser import get_flask_app_base_url
 
-base_uri = get_flask_app()
+base_uri = get_flask_app_base_url()
 data_file = get_csv_from_file("register_api_data.csv")
 url_path_register = "register"
 url_path_delete = "delete"

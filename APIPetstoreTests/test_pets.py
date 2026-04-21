@@ -1,6 +1,6 @@
 from utils.my_utils import get_api_data, put_data
 import random
-from utils.config_reader import get_pet_url_api
+from utils.my_config_parser import get_pet_url_api
 
 base_uri = get_pet_url_api()
 pet_id = str(random.randint(250002, 260002))

@@ -1,8 +1,8 @@
 from utils.api_utils import post_api_data
 from utils.file_utils import get_json_from_file
-from utils.config_reader import get_flask_app
+from utils.my_config_parser import get_flask_app_base_url
 
-base_uri = get_flask_app()
+base_uri = get_flask_app_base_url()
 url_path = "register"
 register_json_file = "register_api_valid.json"
 

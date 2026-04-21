@@ -1,10 +1,10 @@
 from utils.file_utils import get_json_from_file
 from utils.api_utils import post_api_data
-from utils.config_reader import get_flask_app
+from utils.my_config_parser import get_flask_app_base_url
 import pytest
 
 login_json_file = "login_valid.json"
-baseURI = get_flask_app()
+baseURI = get_flask_app_base_url()
 
 login_url_path = "login"
 users_url_path = "users"
