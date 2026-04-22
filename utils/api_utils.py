@@ -47,4 +47,5 @@ def new_del_api(url, body, op_header=None):
     headers = {"content-type": "application/json"}
     headers = (headers | op_header) if isinstance(op_header, dict) else headers
     response = requests.delete(url, json=body, headers=headers, verify=False)
+    print("Deleted worker with the id:", body["id"])
     return response

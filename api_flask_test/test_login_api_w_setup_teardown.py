@@ -10,38 +10,60 @@ login_url_path = "login"
 del_url_path = "delete"
 register_json_file = "register_api_valid.json"
 rand_num = random.randint(0, 1000)
-email = "automateuser@auto" + str(rand_num)
-password = "1234"
+# email = "automateuser@auto" + str(rand_num)
+# password = "1234"
+
+
+def generate_worker():
+    rand_num = random.randint(0, 1000)
+    email = "automateuser@auto" + str(rand_num)
+    password = random.randint(1111, 9999)
+    return email, str(password)
+
 
 
 @pytest.fixture
 def reg_user():
+    email, password = generate_worker()
     payload = get_payload_dict_regapi(email, password)
     regurl = base_uri + reg_url_path
     reg_response = post_api_data(regurl, payload)
     assert reg_response.status_code == 201
     assert reg_response.json()["id"]
     data = reg_response.json()
-    yield data  ##anything after this stmt, will run as part of teardown, or after the test function is executed.
+    yield {
+        "email": email,
+        "password": password,
+        "id": data["id"]
+    }  ##anything after this stmt, will run as part of teardown, or after the test function is executed.
+    #teardown
     del_url = base_uri + del_url_path
     login_url = base_uri + login_url_path
     login_resp = post_api_data(login_url, payload)
     token = login_resp.json()["token"]
     headers = {"x-access-token": token}
+    payload = {"id": reg_response.json()["id"]}
     del_resp = new_del_api(del_url, payload, headers)
     assert del_resp.status_code == 200
     assert del_resp.json()["id"] == reg_response.json()["id"]
 
 
 def test_login_correct_create_creds(reg_user):
-    payload = get_payload_dict_regapi(email, password)
+    print("reg_user:", reg_user)
+    payload = {
+        "email": reg_user["email"],
+        "password": reg_user["password"]
+    }
     url = base_uri + login_url_path
     reg_response = post_api_data(url, payload)
     assert reg_response.status_code == 200
 
 
 def test_login_empty_password(reg_user):
-    payload = get_payload_dict_regapi(email, "")
+    payload = {
+        "email": reg_user["email"],
+        "password": ""
+    }
     url = base_uri + login_url_path
     reg_response = post_api_data(url, payload)
     assert reg_response.status_code == 401
