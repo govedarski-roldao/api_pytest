@@ -41,3 +41,10 @@ def delete_api_data(url, user_id, token, op_header=None):
     )
 
     return response
+
+
+def new_del_api(url, body, op_header=None):
+    headers = {"content-type": "application/json"}
+    headers = (headers | op_header) if isinstance(op_header, dict) else headers
+    response = requests.delete(url, json=body, headers=headers, verify=False)
+    return response

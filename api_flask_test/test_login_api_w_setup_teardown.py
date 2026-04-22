@@ -1,5 +1,5 @@
 import pytest
-from utils.api_utils import post_api_data
+from utils.api_utils import post_api_data, new_del_api
 from utils.file_utils import get_json_from_file
 from utils.my_config_parser import get_flask_app_base_url
 import random
@@ -7,7 +7,7 @@ import random
 base_uri = get_flask_app_base_url()
 reg_url_path = "register"
 login_url_path = "login"
-del_url_path
+del_url_path = "delete"
 register_json_file = "register_api_valid.json"
 rand_num = random.randint(0, 1000)
 email = "automateuser@auto" + str(rand_num)
@@ -23,7 +23,15 @@ def reg_user():
     assert reg_response.json()["id"]
     data = reg_response.json()
     yield data  ##anything after this stmt, will run as part of teardown, or after the test function is executed.
-    del
+    del_url = base_uri + del_url_path
+    login_url = base_uri + login_url_path
+    login_resp = post_api_data(login_url, payload)
+    token = login_resp.json()["token"]
+    headers = {"x-access-token": token}
+    del_resp = new_del_api(del_url, payload, headers)
+    assert del_resp.status_code == 200
+    assert del_resp.json()["id"] == reg_response.json()["id"]
+
 
 def test_login_correct_create_creds(reg_user):
     payload = get_payload_dict_regapi(email, password)
