@@ -10,6 +10,8 @@ login_url_path = "login"
 del_url_path = "delete"
 register_json_file = "register_api_valid.json"
 rand_num = random.randint(0, 1000)
+
+
 # email = "automateuser@auto" + str(rand_num)
 # password = "1234"
 
@@ -21,9 +23,10 @@ def generate_worker():
     return email, str(password)
 
 
-
 @pytest.fixture
 def reg_user():
+    ## test setup
+
     email, password = generate_worker()
     payload = get_payload_dict_regapi(email, password)
     regurl = base_uri + reg_url_path
@@ -36,7 +39,9 @@ def reg_user():
         "password": password,
         "id": data["id"]
     }  ##anything after this stmt, will run as part of teardown, or after the test function is executed.
-    #teardown
+
+    ## test teardown
+
     del_url = base_uri + del_url_path
     login_url = base_uri + login_url_path
     login_resp = post_api_data(login_url, payload)
